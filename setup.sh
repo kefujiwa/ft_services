@@ -21,16 +21,17 @@ SERVICES=(
 	"wordpress"
 )
 
-initialize () {
+init () {
 	minikube stop
 	minikube delete
 	minikube start --driver=docker --cpus=2
 	minikube dashboard &
 	eval $(minikube docker-env)
-	kubectl apply -f srcs/config/config.yaml
+	kubectl apply -f srcs/common/secret.yaml
+	kubectl apply -f srcs/common/volume.yaml
 }
 
-build_container () {
+build_images () {
 	printf "${BLUE}Building images...\n${RESET}"
 	for e in ${SERVICES[@]}; do
 		printf "${BLUE}Building ${e}...\n${RESET}"
@@ -42,7 +43,7 @@ setup_matallb () {
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-	kubectl apply -f srcs/metalLB.yaml
+	kubectl apply -f srcs/common/metallb-config.yaml
 }
 
 setup_services () {
@@ -52,7 +53,7 @@ setup_services () {
 	done
 }
 
-greeting () {
+welcome () {
 	printf ${BOLD}${BLUE}
 	echo 'Welcome to ...'
 	echo ''
@@ -64,8 +65,8 @@ greeting () {
 	printf ${RESET}
 }
 
-initialize
-build_container
+init
+build_images
 setup_metallb
 setup_services
-greeting
+welcome

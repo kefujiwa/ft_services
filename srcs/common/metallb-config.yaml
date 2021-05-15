@@ -1,0 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    metallb-config.yaml                                :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/15 21:01:20 by kefujiwa          #+#    #+#              #
+#    Updated: 2021/05/15 21:03:42 by kefujiwa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.1.240-192.168.1.250
