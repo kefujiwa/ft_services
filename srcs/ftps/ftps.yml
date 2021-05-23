@@ -1,0 +1,95 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ftps.yml                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/19 18:52:29 by kefujiwa          #+#    #+#              #
+#    Updated: 2021/05/23 17:55:03 by kefujiwa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ftps
+  labels:
+    app: ftps
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ftps
+  template:
+    metadata:
+      labels:
+        app: ftps
+    spec:
+      volumes:
+      - name: wordpress-storage
+        persistentVolumeClaim:
+          claimName: wordpress-pvc
+      containers:
+      - name: ftps
+        image: kefujiwa/ftps:latest
+        imagePullPolicy: Never
+        name: ftps
+        ports:
+        - containerPort: 20
+        - containerPort: 21
+        - containerPort: 30020
+        - containerPort: 30021
+        livenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep vsftpd"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        volumeMounts:
+        - name: wordpress-storage
+          mountPath: /var/lib/ftp
+        env:
+        - name: SERVICE
+          value: ftps
+        - name: FTPS_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft_secret
+              key: wp_user
+        - name: FTPS_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft_secret
+              key: wp_pass
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+  labels:
+    apps: ftps
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+spec:
+  selector:
+    app: ftps
+  type: LoadBalancer
+  ports:
+  - port: 20
+    targetPort: 20
+    protocol: TCP
+    name: ftps-data
+  - port: 21
+    targetPort: 21
+    protocol: TCP
+    name: ftps-ctl
+  - port: 30020
+    targetPort: 30020
+    protocol: TCP
+    name: ftps-pasv-data
+  - port: 30021
+    targetPort: 30021
+    protocol: TCP
+    name: ftps-pasv-ctl
