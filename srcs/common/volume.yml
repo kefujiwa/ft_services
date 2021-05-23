@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    volume.yaml                                        :+:      :+:    :+:    #
+#    volume.yml                                         :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/15 14:30:26 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/15 14:54:32 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/23 16:26:39 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
       storage: 2Gi
@@ -34,6 +35,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
       storage: 1Gi
@@ -49,6 +51,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: standard
   resources:
     requests:
       storage: 1Gi
