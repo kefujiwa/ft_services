@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 13:26:03 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/23 17:50:18 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/23 21:08:06 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ COPY	./srcs/*	/tmp/
 RUN	mkdir -p /etc/telegraf && \
 	mv /tmp/telegraf.conf /etc/telegraf/ && \
 	mv /tmp/vsftpd.conf /etc/vsftpd/ && \
-	chmod 755 /tmp/init.sh
+	chmod +x /tmp/init.sh
 
 EXPOSE	20 21 30020 30021
 
