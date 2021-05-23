@@ -1,0 +1,70 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    nginx.yml                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/23 21:27:49 by kefujiwa          #+#    #+#              #
+#    Updated: 2021/05/23 21:38:35 by kefujiwa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: kefujiwa/nginx:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 80
+        - containerPort: 443
+        - containerPort: 22
+        libenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx && pgrep sshd"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: SERVICE
+          value: nginx
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  annotations:
+    metallb.universe.tf/allow-shared-ip: shared
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: TCP
+    name: http
+  - port: 443
+    targetPort: 443
+    protocol: TCP
+    name: https
+  - port: 22
+    targetPort: 22
+    protocol: TCP
+    name: ssh
