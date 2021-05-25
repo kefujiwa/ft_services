@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/16 13:26:03 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/23 21:08:06 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/23 23:57:31 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,4 +45,4 @@ RUN	mkdir -p /etc/telegraf && \
 
 EXPOSE	20 21 30020 30021
 
-ENTRYPOINT [ "/tmp/init.sh" ]
+ENTRYPOINT	[ "/tmp/init.sh" ]
