@@ -1,0 +1,81 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    influxdb.yml                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/25 16:14:59 by kefujiwa          #+#    #+#              #
+#    Updated: 2021/05/25 16:31:15 by kefujiwa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: influxdb
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - name: influxdb
+        image: kefujiwa/influxdb:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8086
+        livenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep influxd"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: SERVICE
+          value: influxdb
+        - name: DOCKER_INFLUXDB_INIT_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: ft-secret
+              key: influxdb_name
+        - name: DOCKER_INFLUXDB_INIT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ft-secret
+              key: influxdb_password
+        - name: DOCKER_INFLUXDB_INIT_ORG
+          value: influxdb_organization
+        - name: DOCKER_INFLUXDB_INIT_BUCKET
+          value: influxdb_bucket
+        volumeMounts:
+        - name: influxdb-storage
+          mountPath: /var/lib/influxdb
+      volumes:
+      - name: influxdb-storage
+        persistentVolumeClaim:
+          claimName: influxdb-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb
+  labels:
+    app: influxdb
+spec:
+  type: ClusterIP
+  selector:
+    app: influxdb
+  ports:
+  - port: 8086
+    targetPort: 8086
+    protocol: TCP
+    name: influxdb
