@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 00:05:39 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/24 00:17:33 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/25 19:03:03 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: phpmyadmin
-  lables:
+  labels:
     app: phpmyadmin
 spec:
   replicas: 1

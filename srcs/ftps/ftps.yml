@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/19 18:52:29 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 16:26:06 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/25 19:01:40 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,12 @@ spec:
         - name: FTPS_USER
           valueFrom:
             secretKeyRef:
-              name: ft_secret
+              name: ft-secret
               key: wp_user
         - name: FTPS_PASS
           valueFrom:
             secretKeyRef:
-              name: ft_secret
+              name: ft-secret
               key: wp_pass
         volumeMounts:
         - name: wordpress-storage

@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 21:27:49 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/24 00:15:06 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/25 19:02:34 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ spec:
         - containerPort: 80
         - containerPort: 443
         - containerPort: 22
-        libenessProbe:
+        livenessProbe:
           exec:
             command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx && pgrep sshd"]
           initialDelaySeconds: 10

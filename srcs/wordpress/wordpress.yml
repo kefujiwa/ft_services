@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 22:38:35 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 16:32:40 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/25 19:03:33 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ spec:
       - name: wordpress
         image: kefujiwa/wordpress:latest
         imagePullPolicy: Never
-         ports:
+        ports:
         - containerPort: 5050
         libenessProbe:
           exec:
