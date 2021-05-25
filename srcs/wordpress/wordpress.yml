@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 22:38:35 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/24 00:18:21 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/25 16:32:40 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,6 @@ spec:
       labels:
         app: wordpress
     spec:
-      volumes:
-      - name: wordpress-storage
-        persistentVolumeClaim:
-          claimName: wordpress-pvc
       containers:
       - name: wordpress
         image: kefujiwa/wordpress:latest
@@ -42,9 +38,6 @@ spec:
             command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx && pgrep php-fpm"]
           initialDelaySeconds: 10
           periodSeconds: 5
-        volumeMounts:
-        - name: wordpress-storage
-          mountPath: /var/www/wordpress
         env:
         - name: SERVICE
           value: wordpress
@@ -65,6 +58,13 @@ spec:
               key: db_pass
         - name: WORDPRESS_DB_HOST
           value: mysql
+        volumeMounts:
+        - name: wordpress-storage
+          mountPath: /var/www/wordpress
+      volumes:
+      - name: wordpress-storage
+        persistentVolumeClaim:
+          claimName: wordpress-pvc
         
 ---
 
