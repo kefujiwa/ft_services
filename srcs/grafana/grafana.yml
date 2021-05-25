@@ -1,0 +1,72 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    grafana.yml                                        :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/25 18:03:25 by kefujiwa          #+#    #+#              #
+#    Updated: 2021/05/25 18:20:57 by kefujiwa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - name: grafana
+        image: kefujiwa/grafana:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 3000
+        libenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep grafana-server"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: SERVICE
+          value: grafana
+        - name: USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-secret
+              key: influxdb_name
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ft-secret
+              key: influxdb_password
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+  annotations:
+    metallb.universe.tf/allow-shared-ip: ft_services
+spec:
+  type: LoadBalancer
+  selector:
+    app: grafana
+  ports:
+  - port: 3000
+    targetPort: 3000
+    protocol: TCP
+    name: grafana
