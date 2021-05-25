@@ -1,0 +1,75 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    phpmyadmin.yml                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/05/24 00:05:39 by kefujiwa          #+#    #+#              #
+#    Updated: 2021/05/24 00:17:33 by kefujiwa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  lables:
+    app: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      name: phpmyadmin
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: kefujiwa/phpmyadmin:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        livenessProbe:
+          exec:
+            command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx && pgrep php-fpm"]
+          initialDelaySeconds: 10
+          periodSeconds: 5
+        env:
+        - name: SERVICE
+          value: phpmyadmin
+        - name: PMA_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-secret
+              key: db_user
+        - name: PMA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: ft-secret
+              key: db_pass
+        - name: PMA_HOST
+          value: mysql
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin
+  labels:
+    app: phpmyadmin
+  annotations:
+    metallb.universe.tf/allow-shared-ip: ft_services
+spec:
+  type: LoadBalancer
+  selector:
+    app: phpmyadmin
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    name: phpmyadmin
