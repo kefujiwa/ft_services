@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:27:31 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/23 23:57:00 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/28 02:00:36 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,18 @@ RUN	mkdir -p /var/www/phpmyadmin && \
 	tar -xvzf /tmp/phpmyadmin.tar.gz -C /var/www/phpmyadmin --strip-components 1 && \
 	rm /tmp/phpmyadmin.tar.gz && \
 	chown -R nginx:nginx var/www/phpmyadmin;
+
+# generate secret key > create csr > create digital certificate
+RUN	mkdir -p /etc/nginx/ssl && \
+	openssl genrsa -out /etc/nginx/ssl/server.key 2048 && \
+	openssl req -new \
+				-key /etc/nginx/ssl/server.key \
+				-subj "/C=JP/ST=Tokyo/L=Minato/O=42/OU=42Tokyo/CN=localhost" \
+				-out /etc/nginx/ssl/server.csr && \
+	openssl x509 -in /etc/nginx/ssl/server.csr \
+				 -days 365 \
+				 -req -signkey /etc/nginx/ssl/server.key \
+				 -out /etc/nginx/ssl/server.crt
 
 # create a directory to store nginx.pid -- https://github.com/gliderlabs/docker-alpine/issues/185
 RUN mkdir -p /run/nginx && \
