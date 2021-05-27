@@ -24,7 +24,7 @@ SERVICES=(
 init () {
 	minikube stop
 	minikube delete
-	minikube start --driver=docker --cpus=2
+	minikube start --driver=docker --cpus=2 --vm-driver none
 	minikube dashboard &
 	eval $(minikube docker-env)
 	kubectl apply -f srcs/common/secret.yml
