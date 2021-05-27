@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/25 16:14:59 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/28 01:43:19 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/28 02:20:47 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: ft-secret
-              key: influxdb_password
+              key: influxdb_pass
         - name: DOCKER_INFLUXDB_INIT_ORG
           value: influxdb_organization
         - name: DOCKER_INFLUXDB_INIT_BUCKET
