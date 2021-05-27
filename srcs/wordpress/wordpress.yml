@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 22:38:35 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 19:03:33 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/28 01:46:11 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ spec:
         imagePullPolicy: Never
         ports:
         - containerPort: 5050
-        libenessProbe:
+        livenessProbe:
           exec:
             command: ["/bin/sh", "-c", "pgrep telegraf && pgrep nginx && pgrep php-fpm"]
           initialDelaySeconds: 10
