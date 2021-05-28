@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:27:31 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/28 02:00:36 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/28 14:19:37 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ RUN	apk update && \
 						php7-pdo_mysql \
 						php7-phar \
 						php7-posix \
+						php7-session \
 						php7-soap \
 						php7-xml \
 						php7-xmlrpc \
