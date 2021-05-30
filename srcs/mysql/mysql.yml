@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 01:21:13 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 16:55:37 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 23:43:52 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ spec:
           valueFrom:
             secretKeyRef:
               name: ft-secret
-              key: db_name
+              key: db_user
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
