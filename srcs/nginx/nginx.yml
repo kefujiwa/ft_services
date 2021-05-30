@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 21:27:49 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 15:40:05 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:56:44 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,8 @@ spec:
           periodSeconds: 5
         env:
         - name: SERVICE
+          value: nginx-service
+        - name: DATABASE
           value: nginx
 
 ---

@@ -6,9 +6,25 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 22:38:35 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 15:52:04 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:57:10 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: wordpress-pvc
+  labels:
+    app: wordpress
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 2Gi
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
@@ -40,6 +56,8 @@ spec:
           periodSeconds: 5
         env:
         - name: SERVICE
+          value: wordpress-service
+        - name: DATABASE
           value: wordpress
         - name: WORDPRESS_DB_NAME
           valueFrom:

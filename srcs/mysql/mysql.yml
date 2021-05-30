@@ -6,9 +6,25 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 01:21:13 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/28 17:01:34 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:55:37 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pvc
+  labels:
+    app: mysql
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
@@ -39,6 +55,8 @@ spec:
           periodSeconds: 10
         env:
         - name: SERVICE
+          value: mysql-service
+        - name: DATABASE
           value: mysql
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:

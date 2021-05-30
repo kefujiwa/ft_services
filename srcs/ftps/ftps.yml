@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/19 18:52:29 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 15:37:16 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:54:56 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ spec:
           periodSeconds: 5
         env:
         - name: SERVICE
+          value: ftps-service
+        - name: DATABASE
           value: ftps
 
 ---

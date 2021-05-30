@@ -6,9 +6,25 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/25 16:14:59 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 15:38:00 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:54:12 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: influxdb-pvc
+  labels:
+    app: influxdb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+  resources:
+    requests:
+      storage: 1Gi
+
+---
 
 apiVersion: apps/v1
 kind: Deployment
@@ -39,22 +55,10 @@ spec:
           periodSeconds: 5
         env:
         - name: SERVICE
+          value: influxdb-service
+        - name: DATABASE
           value: influxdb
-        - name: DOCKER_INFLUXDB_INIT_USERNAME
-          valueFrom:
-            secretKeyRef:
-              name: ft-secret
-              key: influxdb_user
-        - name: DOCKER_INFLUXDB_INIT_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: ft-secret
-              key: influxdb_pass
-        - name: DOCKER_INFLUXDB_INIT_ORG
-          value: influxdb_organization
-        - name: DOCKER_INFLUXDB_INIT_BUCKET
-          value: influxdb_bucket
-        volumeMounts:
+       volumeMounts:
         - name: influxdb-storage
           mountPath: /var/lib/influxdb
       volumes:

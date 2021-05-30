@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 00:05:39 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 16:26:54 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:56:03 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,8 @@ spec:
           periodSeconds: 5
         env:
         - name: SERVICE
+          value: phpmyadmin-service
+        - name: DATABASE
           value: phpmyadmin
         - name: PMA_HOST
           value: mysql-service:3306
