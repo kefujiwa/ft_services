@@ -21,6 +21,12 @@ chown -R mysql:mysql /var/lib/mysql/
 
 telegraf &
 
-/usr/bin/mysqld_safe --datadir=/var/lib/mysql --plugin-dir=/usr/lib/mariadb/plugin
+/usr/bin/mysqld_safe \
+	--user=mysql \
+	--datadir=/var/lib/mysql \
+	--plugin-dir=/usr/lib/mariadb/plugin \
+	--pid-file=/run/mysqld/mariadb.pid \
+	--port=3306 \
+	--skip-networking=0
 
 tail -f /var/lib/mysql/mysql-*.err
