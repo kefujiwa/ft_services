@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:26:56 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 23:07:10 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 00:09:13 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ FROM	alpine:3.13
 # set maintainer and version information
 LABEL	maintainer="Kenshi Fujiwara <kefujiwa@student.42tokyo.jp>"
 LABEL	version="1.0"
-LABEL	description="ftps server"
+LABEL	description="mysql server"
 
 # install necessary tools
 RUN	apk update && \
