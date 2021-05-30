@@ -34,7 +34,7 @@ build_images () {
 	printf "${BLUE}Building images...\n${RESET}"
 	for e in ${SERVICES[@]}; do
 		printf "${BLUE}Building ${e}...\n${RESET}"
-		docker build -t kefujiwa/${e} ./srcs/${e}/
+		docker build -t kefujiwa/${e} -q ./srcs/${e}/
 	done
 }
 
