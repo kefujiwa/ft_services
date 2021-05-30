@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:27:31 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/28 14:19:37 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 00:03:02 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ RUN	apk update && \
 						php7-imap \
 						php7-json \
 						php7-ldap \
+						php7-mbstring \
 						php7-mcrypt \
 						php7-mysqli \
 						php7-pdo \
