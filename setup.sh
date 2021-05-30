@@ -27,15 +27,14 @@ init () {
 	minikube start --driver=docker --cpus=2
 	minikube dashboard &
 	eval $(minikube docker-env)
-	kubectl apply -f srcs/common/secret.yml
-	kubectl apply -f srcs/common/volume.yml
+	kubectl apply -f srcs/secret/secret.yml
 }
 
 build_images () {
 	printf "${BLUE}Building images...\n${RESET}"
 	for e in ${SERVICES[@]}; do
 		printf "${BLUE}Building ${e}...\n${RESET}"
-		docker build -t kefujiwa/${e} -q ./srcs/${e}/
+		docker build -t kefujiwa/${e} ./srcs/${e}/
 	done
 }
 
@@ -43,7 +42,7 @@ setup_metallb () {
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-	kubectl apply -f srcs/common/metallb-config.yml
+	kubectl apply -f srcs/metallb/metallb-config.yml
 }
 
 setup_services () {
