@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 00:05:39 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 15:38:48 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:26:54 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,18 +41,8 @@ spec:
         env:
         - name: SERVICE
           value: phpmyadmin
-        - name: PMA_USER
-          valueFrom:
-            secretKeyRef:
-              name: ft-secret
-              key: db_user
-        - name: PMA_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: ft-secret
-              key: db_pass
         - name: PMA_HOST
-          value: mysql
+          value: mysql-service:3306
 
 ---
 
