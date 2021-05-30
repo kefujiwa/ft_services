@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:24:32 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 17:49:41 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 02:25:43 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,12 +41,6 @@ RUN	mkdir -p /etc/grafana/ssl && \
 				 -req -signkey /etc/grafana/ssl/grafana.key \
 				 -out /etc/grafana/ssl/grafana.crt
 
-# set environtment variable
-ENV	GF_SECURITY_ADMIN_USER: admin \
-	GF_SECURITY_ADMIN_PASSWORD: password \
-	GF_USERS_ALLOW_SIGN_UP: "false" \
-	GF_USERS_ALLOW_ORG_CREATE: "false"
-
 # copy srcs to tmp directory
 COPY	./srcs/*	/tmp/
 
@@ -54,6 +48,8 @@ COPY	./srcs/*	/tmp/
 RUN	mkdir -p /etc/telegraf && \
 	mv /tmp/telegraf.conf /etc/telegraf/ && \
 	mv /tmp/custom.ini /usr/share/grafana/conf/ && \
+	mv /tmp/datasources /usr/share/grafana/conf/provisioning/ && \
+	mv /tmp/dashboards /usr/share/grafana/conf/provisioning/ && \
 	chmod +x /tmp/init.sh
 
 WORKDIR	/usr/share/grafana
