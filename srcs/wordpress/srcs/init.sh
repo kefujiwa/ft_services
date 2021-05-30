@@ -4,13 +4,33 @@
 if [ ! "$(ls -A /var/www/wordpress)" ]; then
 	tar -xvzf /tmp/wordpress.tar.gz -C /var/www/wordpress --strip-components 1 && \
 	rm /tmp/wordpress.tar.gz && \
-	chmod +x /var/www/wordpress
+	chmod +x /var/www/wordpress && \
+	chown -R nginx:nginx var/www/wordpress
 
 	sed -e "s/database_name_here/$WORDPRESS_DB_NAME/g" \
 		-e "s/username_here/$WORDPRESS_DB_USER/g" \
 		-e "s/password_here/$WORDPRESS_DB_PASSWORD/g" \
 		-e "s/localhost/$WORDPRESS_DB_HOST/g" \
 		/var/www/wordpress/wp-config-sample.php > /var/www/wordpress/wp-config.php
+
+	until wp core install \
+		--url=https://192.168.49.100:5050 \
+		--title=42tokyo \
+		--admin_user=admin \
+		--admin_password=admin \
+		--admin_email=admin@example.com \
+		--path=/var/www/wordpress \
+		--allow-root;
+	do
+		sleep 5
+	done
+
+	wp user create nobody nobody@example.com \
+		--role=editor \
+		--user_pass=nobody
+	wp user create somebody somebody@example.com \
+		--role=editor \
+		--user_pass=somebody
 fi
 
 sed -i \

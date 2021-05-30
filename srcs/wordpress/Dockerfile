@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:29:22 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/23 23:57:19 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 16:01:43 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,12 @@ RUN	apk update && \
 
 # wget wordpress
 RUN	mkdir -p /var/www/wordpress && \
-	wget -O /tmp/wordpress.tar.gz --no-check-certificate https://wordpress.org/latest.tar.gz
+	wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
+
+# wget wp-cli
+RUN wget -O /tmp/wp-cli.phar https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x /tmp/wp-cli.phar && \
+    mv /tmp/wp-cli.phar /usr/local/bin/wp
 
 # generate secret key > create csr > create digital certificate
 RUN	mkdir -p /etc/nginx/ssl && \

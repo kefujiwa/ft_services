@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 22:38:35 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 15:39:08 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 15:52:04 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ spec:
               name: ft-secret
               key: db_pass
         - name: WORDPRESS_DB_HOST
-          value: mysql
+          value: mysql-service:3306
         volumeMounts:
         - name: wordpress-storage
           mountPath: /var/www/wordpress
