@@ -6,14 +6,14 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 21:27:49 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 19:02:34 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 15:40:05 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: nginx-deployment
   labels:
     app: nginx
 spec:
@@ -48,7 +48,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
+  name: nginx-service
   labels:
     app: nginx
   annotations:

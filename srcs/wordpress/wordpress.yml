@@ -6,14 +6,14 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/23 22:38:35 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/28 01:46:11 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/30 15:39:08 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: wordpress-deployment
   labels:
     app: wordpress
 spec:
@@ -71,7 +71,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress
+  name: wordpress-service
   labels:
     app: wordpress
   annotations:

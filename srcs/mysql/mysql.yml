@@ -6,14 +6,16 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/24 01:21:13 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 18:25:54 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/28 17:01:34 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysql-deployment
+  labels:
+    app: mysql
 spec:
   selector:
     matchLabels:
@@ -71,7 +73,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
+  name: mysql-service
   labels:
     app: mysql
 spec:
