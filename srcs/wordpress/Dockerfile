@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:29:22 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 16:01:43 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 15:26:52 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,9 @@ RUN	apk update && \
 						php7-xmlrpc \
 						telegraf
 
+# copy srcs to tmp directory
+COPY	./srcs	/tmp
+
 # wget wordpress
 RUN	mkdir -p /var/www/wordpress && \
 	wget -O /tmp/wordpress.tar.gz https://wordpress.org/latest.tar.gz
@@ -70,9 +73,6 @@ RUN	mkdir -p /etc/nginx/ssl && \
 # create a directory to store nginx.pid -- https://github.com/gliderlabs/docker-alpine/issues/185
 RUN mkdir -p /run/nginx && \
 	mkdir -p /run/php-fpm
-
-# copy srcs to tmp directory
-COPY	./srcs/*	/tmp/
 
 # move configuration files to the specific directory
 RUN	mkdir -p /etc/telegraf && \

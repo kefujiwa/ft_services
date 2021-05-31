@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:27:31 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/31 00:03:02 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 15:28:07 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,9 @@ RUN	apk update && \
 						php7-xmlrpc \
 						telegraf
 
+# copy srcs to tmp directory
+COPY	./srcs	/tmp
+
 # wget phpmyadmin
 RUN	mkdir -p /var/www/phpmyadmin && \
 	wget -O /tmp/phpmyadmin.tar.gz --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz && \
@@ -70,9 +73,6 @@ RUN	mkdir -p /etc/nginx/ssl && \
 # create a directory to store nginx.pid -- https://github.com/gliderlabs/docker-alpine/issues/185
 RUN mkdir -p /run/nginx && \
 	mkdir -p /run/php-fpm
-
-# copy srcs to tmp directory
-COPY	./srcs/*	/tmp/
 
 # move configuration files to the specific directory
 RUN	mkdir -p /etc/telegraf && \

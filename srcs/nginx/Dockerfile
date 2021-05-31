@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:28:41 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/23 23:57:48 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 15:27:08 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ RUN	ssh-keygen -q -t rsa -N '' -f /etc/ssh/ssh_host_rsa_key
 RUN mkdir -p /run/nginx
 
 # copy srcs to tmp directory
-COPY	./srcs/*	/tmp/
+COPY	./srcs	/tmp
 
 # move configuration files to the specific directory
 RUN	mkdir -p /etc/telegraf && \

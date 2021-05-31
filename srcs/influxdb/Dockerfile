@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:29:48 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/25 16:08:44 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 15:25:18 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RUN	apk update && \
 	apk add --no-cache influxdb telegraf
 
 # copy srcs to tmp directory
-COPY	./srcs/*	/tmp/
+COPY	./srcs	/tmp
 
 # move configuration files to the specific directory
 RUN	mkdir -p /etc/telegraf && \
