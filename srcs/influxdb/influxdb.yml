@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/25 16:14:59 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/30 16:54:12 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 17:16:35 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ spec:
           value: influxdb-service
         - name: DATABASE
           value: influxdb
-       volumeMounts:
+        volumeMounts:
         - name: influxdb-storage
           mountPath: /var/lib/influxdb
       volumes:
