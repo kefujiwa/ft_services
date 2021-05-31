@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:28:41 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/06/01 02:15:09 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/06/01 02:27:31 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,9 @@ RUN	mkdir -p /etc/nginx/ssl && \
 				 -days 365 \
 				 -req -signkey /etc/nginx/ssl/server.key \
 				 -out /etc/nginx/ssl/server.crt
+
+# configure ssh connection
+RUN    ssh-keygen -q -t rsa -N '' -f /etc/ssh/ssh_host_rsa_key
 
 # create a directory to store nginx.pid -- https://github.com/gliderlabs/docker-alpine/issues/185
 RUN mkdir -p /run/nginx
