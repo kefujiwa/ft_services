@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:24:32 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/31 15:24:40 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/05/31 15:38:11 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,8 +48,8 @@ COPY	./srcs	/tmp
 RUN	mkdir -p /etc/telegraf && \
 	mv /tmp/telegraf.conf /etc/telegraf/ && \
 	mv /tmp/custom.ini /usr/share/grafana/conf/ && \
-	mv /tmp/datasources /usr/share/grafana/conf/provisioning/ && \
-	mv /tmp/dashboards /usr/share/grafana/conf/provisioning/ && \
+	mv /tmp/datasources/* /usr/share/grafana/conf/provisioning/datasources/ && \
+	mv /tmp/dashboards/* /usr/share/grafana/conf/provisioning/dashboards/ && \
 	chmod +x /tmp/init.sh
 
 WORKDIR	/usr/share/grafana
