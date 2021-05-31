@@ -68,8 +68,7 @@ welcome () {
 	echo '       _|  _|        _|          _|  _|    _|  _|        _|            _|_|'
 	echo ' _|_|_|      _|_|_|  _|            _|      _|    _|_|_|    _|_|_|  _|_|_|  '
 	echo ''
-	echo 'Open http://192.168.49.100:80 on your browser\n'
-	printf ${RESET}
+	printf 'Open http://192.168.49.100:80 on your browser\n'${RESET}
 }
 
 init
