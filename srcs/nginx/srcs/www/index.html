@@ -53,9 +53,9 @@
     <label class="nav-unshown" id="nav-close" for="nav-input"></label>
     <ul id="nav-content">
       <div class="inner flex">
-        <li class="nav-item"><a class="nav-wp" href="https://192.168.49.100:5050">WORDPRESS</a></li>
-        <li class="nav-item"><a class="nav-php" href="https://192.168.49.100:5000">PHPMYADMIN</a></li>
-        <li class="nav-item"><a class="nav-grafana" href="https://192.168.49.100:3000">GRAFANA</a></li>
+        <li class="nav-item"><a class="nav-wp" href="https://192.168.49.100:5050" target="_blank" rel="noopener">WORDPRESS</a></li>
+        <li class="nav-item"><a class="nav-php" href="https://192.168.49.100:5000" target="_blank" rel="noopener">PHPMYADMIN</a></li>
+        <li class="nav-item"><a class="nav-grafana" href="https://192.168.49.100:3000" target="_blank" rel="noopener">GRAFANA</a></li>
       </div>
     </ul>
   </nav>
@@ -89,30 +89,36 @@
     <div class="code-chunk">
       <code>kubectl exec -it "pod-name-here" -- /bin/sh</code>
     </div>
-    <p>For details about kubernetes, go to <a class="link" href="https://www.notion.so/Kubernetes-8427c9be0e57405ba30868848e27992d">kefujiwa's Notion Page</a>.</p>
+    <p>For details about kubernetes, go to <a class="link" href="https://www.notion.so/Kubernetes-8427c9be0e57405ba30868848e27992d" target="_blank" rel="noopener">kefujiwa's Notion Page</a>.</p>
   </section>
   <section id="nginx" class="inner">
     <h2>HOW TO ACESS NGINX</h2>
     <p>Nginx HTTP server listens for incoming connection and binds on port 80.</p>
-    <p>Link : <a class="link" href="http://192.168.49.100:80">http://192.168.49.100:80</a>.</p>
+    <p>Link : <a class="link" href="http://192.168.49.100:80" target="_blank" rel="noopener">http://192.168.49.100:80</a>.</p>
     <p>It is a systematic redirection of type 301 to port 443.</p>
     <p>Nginx HTTPS server listens for secure connections on port 443.</p>
-    <p>Link : <a class="link" href="https://192.168.49.100:443">https://192.168.49.100:443</a>.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100:443" target="_blank" rel="noopener">https://192.168.49.100:443</a>.</p>
     <p>The Nginx server will allow access to /phpmyadmin' and 'wordpress'.</p>
-    <p>Link : <a class="link" href="https://192.168.49.100/phpmyadmin">https://192.168.49.100/phpmyadmin</a>.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100/phpmyadmin" target="_blank" rel="noopener">https://192.168.49.100/phpmyadmin</a>.</p>
     <p>This is a reverse proxy to IP:PMAPORT(https://192.168.49.100:5000).</p>
-    <p>Link : <a class="link" href="https://192.168.49.100/wordpress">https://192.168.49.100/wordpress</a>.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100/wordpress" target="_blank" rel="noopener">https://192.168.49.100/wordpress</a>.</p>
     <p>This will make a redirect 307 to IP:WPPORT(https://192.168.49.100:5050).</p>
     <p>Use the following command to check redirect 307.</p>
     <div class="code-chunk">
       <code>curl -k -v https://192.168.49.100/wordpress</code>
+    </div>
+    <p>SSHD is listening on port 22.</p>
+    <p>Use the following command to connect Nginx server using SSH.</p>
+    <div class="code-chunk">
+      <code>ssh sshuser@192.168.49.100 -p 22</code>
+      <code>password: sshpass</code>
     </div>
   </section>
   <section id="wordpress" class="inner">
     <h2>HOW TO ACCESS WORDPRESS</h2>
     <p>The WordPress website have its own nginx server and it is listening on port 5050. </p>
     <p>It works with a MySQL Database that is listening on port 3306.</p>
-    <p>Link : <a class="link" href="https://192.168.49.100:5050">https://192.168.49.100:5050</a></p>
+    <p>Link : <a class="link" href="https://192.168.49.100:5050" target="_blank" rel="noopener">https://192.168.49.100:5050</a></p>
     <p>The following information is the users and an administrator of the WordPress website.</p>
     <ul class="wp-user-list">
       <li class="wp-user-item head">
@@ -137,7 +143,7 @@
     <h2>HOW TO ACCESS PHPMYADMIN</h2>
     <p>phpMyAdmin have its own nginx server and it is listening on port 5050.</p>
     <p>It is linked with the MySQL database listening on port 3036.</p>
-    <p>Link : <a class="link" href="https://192.168.49.100:5000">https://192.168.49.100:5000</a></p>
+    <p>Link : <a class="link" href="https://192.168.49.100:5000" target="_blank" rel="noopener">https://192.168.49.100:5000</a></p>
     <p>The following information is the login info.</p>
     <ul class="wp-user-list">
       <li class="wp-user-item head">
@@ -170,7 +176,7 @@
     <h2>HOW TO ACCESS GRAFANA</h2>
     <p>Grafana platform is listening on port 3000 and it is monitoring all the containers.</p>
     <p>It is linked with an InfluxDB database listening on port 8086.</p>
-    <p>Link : <a class="link" href="https://192.168.49.100:3000">https://192.168.49.100:3000</a></p>
+    <p>Link : <a class="link" href="https://192.168.49.100:3000" target="_blank" rel="noopener">https://192.168.49.100:3000</a></p>
     <p>The following information is the login info.</p>
     <ul class="wp-user-list">
       <li class="wp-user-item head">
