@@ -27,10 +27,12 @@ if [ ! "$(ls -A /var/www/wordpress)" ]; then
 
 	wp user create nobody nobody@example.com \
 		--role=editor \
-		--user_pass=nobody
+		--user_pass=nobody \
+		--allow-root
 	wp user create somebody somebody@example.com \
 		--role=editor \
-		--user_pass=somebody
+		--user_pass=somebody \
+		--allow-root
 fi
 
 sed -i \
