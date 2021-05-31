@@ -138,6 +138,7 @@
         <p class="password">somebody</p>
       </li>
     </ul>
+    <p>Link : <a class="link" href="https://192.168.49.100:5050/wp-admin" target="_blank" rel="noopener">https://192.168.49.100:5050/wp-admin</a></p>
   </section>
   <section id="phpmyadmin" class="inner">
     <h2>HOW TO ACCESS PHPMYADMIN</h2>
@@ -161,7 +162,7 @@
     <p>FTPS server is listening on port 21.</p>
     <p>Following command is an example of ftps usage.</p>
     <div class="code-chunk">
-      <code>lftp -e "set:verify-certificate false" -u ftpsuser,ftpspass 192.168.49.100 -p 21</code>
+      <code>lftp -e "set ssl:verify-certificate false" -u ftpsuser,ftpspass 192.168.49.100 -p 21</code>
       <code>get "file_name"</code>
       <code>put "file_name"</code>
     </div>
