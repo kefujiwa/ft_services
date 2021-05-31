@@ -5,7 +5,7 @@ if [ ! "$(ls -A /var/www/wordpress)" ]; then
 	tar -xvzf /tmp/wordpress.tar.gz -C /var/www/wordpress --strip-components 1 && \
 	rm /tmp/wordpress.tar.gz && \
 	chmod +x /var/www/wordpress && \
-	chown -R nginx:nginx var/www/wordpress
+	chown -R nginx:nginx /var/www/wordpress
 
 	sed -e "s/database_name_here/$WORDPRESS_DB_NAME/g" \
 		-e "s/username_here/$WORDPRESS_DB_USER/g" \

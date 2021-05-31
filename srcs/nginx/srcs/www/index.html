@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="description" content="" />
+<link href="css/reset.css" media="all" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/home.css" rel="stylesheet" type="text/css" />
+<link href="css/loading.css" rel="stylesheet" type="text/css">
+<title>Introduction to ft_services</title>
+<link href="https://fonts.googleapis.com/css2?family=Play&family=Noto+Serif+JP&family=Permanent+Marker&family=Poiret+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="images/favicon.ico" />
+</head>
+
+<body>
+<div class="box shutter">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <defs>
+      <lineargradient id="blue" gradientTransform="rotate(45)">
+        <stop offset="0" stop-color="white"/>
+        <stop offset="1" stop-color="#282fc7"/>
+      </lineargradient>
+    </defs>
+    <g class="anim-0">
+      <circle cx="50" cy="50" r="50" fill="url(#blue)" />
+    </g>
+    <g class="anim-1">
+      <circle cx="50" cy="50" r="5" fill="white" />
+    </g>
+    <g class="anim-2">
+      <circle cx="75" cy="50" r="5" fill="white" />
+      <line x1="25" y1="50" x2="75" y2="50" stroke="white" stroke-width="3" />
+    </g>
+    <g class="anim-3">
+      <circle cx="50" cy="25" r="5" fill="white" />
+      <line x1="50" y1="25" x2="25" y2="75" stroke="white" stroke-width="3" />
+      <line x1="50" y1="25" x2="75" y2="75" stroke="white" stroke-width="3" />
+    </g>
+    <g class="anim-4">
+      <circle cx="75" cy="25" r="5" fill="white" />
+      <line x1="75" y1="25" x2="25" y2="25" stroke="white" stroke-width="3" />
+    </g>
+  </svg>
+</div>
+<div class="nav-head fixed">
+  <nav id="nav-drawer">
+    <input id="nav-input" type="checkbox" class="nav-unshown">
+    <label id="nav-open" for="nav-input"><span></span></label>
+    <label class="nav-unshown" id="nav-close" for="nav-input"></label>
+    <ul id="nav-content">
+      <div class="inner flex">
+        <li class="nav-item"><a class="nav-wp" href="https://192.168.49.100:5050">WORDPRESS</a></li>
+        <li class="nav-item"><a class="nav-php" href="https://192.168.49.100:5000">PHPMYADMIN</a></li>
+        <li class="nav-item"><a class="nav-grafana" href="https://192.168.49.100:3000">GRAFANA</a></li>
+      </div>
+    </ul>
+  </nav>
+  <h2 class="title">42 TOKYO <strong>LEVEL 3</strong></h2>
+</div>
+<header class="container">
+  <h1>Welcome to<br>
+    FT_SERVICES</h1>
+  <div id="visual-1" class="visual right-bg">
+    <div class="inner-visual"> </div>
+  </div>
+  <div id="visual-2" class="visual left-bg">
+    <div class="inner-visual"> </div>
+  </div>
+</header>
+<main>
+  <section id="basic" class="inner">
+    <h2>BASIC INTRODUCTION</h2>
+    <p>Use the following command to start Minikube.</p>
+    <div class="code-chunk">
+      <code>minikube stop</code>
+      <code>minikube delete</code>
+      <code>minikube start</code>
+      <code>minikube dashboard &</code>
+    </div>
+    <p>Use the following command to check all kubernetes components.</p>
+    <div class="code-chunk">
+      <code>kubectl get all</code>
+    </div>
+    <p>Use the following command to access pods.</p>
+    <div class="code-chunk">
+      <code>kubectl exec -it "pod-name-here" -- /bin/sh</code>
+    </div>
+    <p>For details about kubernetes, go to <a class="link" href="https://www.notion.so/Kubernetes-8427c9be0e57405ba30868848e27992d">kefujiwa's Notion Page</a>.</p>
+  </section>
+  <section id="nginx" class="inner">
+    <h2>HOW TO ACESS NGINX</h2>
+    <p>Nginx HTTP server listens for incoming connection and binds on port 80.</p>
+    <p>Link : <a class="link" href="http://192.168.49.100:80">http://192.168.49.100:80</a>.</p>
+    <p>It is a systematic redirection of type 301 to port 443.</p>
+    <p>Nginx HTTPS server listens for secure connections on port 443.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100:443">https://192.168.49.100:443</a>.</p>
+    <p>The Nginx server will allow access to /phpmyadmin' and 'wordpress'.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100/phpmyadmin">https://192.168.49.100/phpmyadmin</a>.</p>
+    <p>This is a reverse proxy to IP:PMAPORT(https://192.168.49.100:5000).</p>
+    <p>Link : <a class="link" href="https://192.168.49.100/wordpress">https://192.168.49.100/wordpress</a>.</p>
+    <p>This will make a redirect 307 to IP:WPPORT(https://192.168.49.100:5050).</p>
+    <p>Use the following command to check redirect 307.</p>
+    <div class="code-chunk">
+      <code>curl -k -v https://192.168.49.100/wordpress</code>
+    </div>
+  </section>
+  <section id="wordpress" class="inner">
+    <h2>HOW TO ACCESS WORDPRESS</h2>
+    <p>The WordPress website have its own nginx server and it is listening on port 5050. </p>
+    <p>It works with a MySQL Database that is listening on port 3306.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100:5050">https://192.168.49.100:5050</a></p>
+    <p>The following information is the users and an administrator of the WordPress website.</p>
+    <ul class="wp-user-list">
+      <li class="wp-user-item head">
+        <p class="username">USER_LOGIN</p>
+        <p class="password">USER_PASS</p>
+      </li>
+      <li class="wp-user-item content">
+        <p class="username">admin</p>
+        <p class="password">admin</p>
+      </li>
+      <li class="wp-user-item content">
+        <p class="username">nobody</p>
+        <p class="password">nobody</p>
+      </li>
+      <li class="wp-user-item content">
+        <p class="username">somebody</p>
+        <p class="password">somebody</p>
+      </li>
+    </ul>
+  </section>
+  <section id="phpmyadmin" class="inner">
+    <h2>HOW TO ACCESS PHPMYADMIN</h2>
+    <p>phpMyAdmin have its own nginx server and it is listening on port 5050.</p>
+    <p>It is linked with the MySQL database listening on port 3036.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100:5000">https://192.168.49.100:5000</a></p>
+    <p>The following information is the login info.</p>
+    <ul class="wp-user-list">
+      <li class="wp-user-item head">
+        <p class="username">USERNAME</p>
+        <p class="password">PASSWORD</p>
+      </li>
+      <li class="wp-user-item content">
+        <p class="username">user</p>
+        <p class="password">password</p>
+      </li>
+    </ul>
+  </section>
+  <section id="ftps" class="inner">
+    <h2>HOW TO ACCESS FTPS</h2>
+    <p>FTPS server is listening on port 21.</p>
+    <p>Following command is an example of ftps usage.</p>
+    <div class="code-chunk">
+      <code>lftp -e "set:verify-certificate false" -u ftpsuser,ftpspass 192.168.49.100 -p 21</code>
+      <code>get "file_name"</code>
+      <code>put "file_name"</code>
+    </div>
+    <p>If you want to check the file in FTPS server, use the following command.</p>
+    <div class="code-chunk">
+      <code>kubectl exec -it "pod:ftps" -- /bin/sh</code>
+      <code>cd /var/lib/ftp</code>
+      <code>ls -la</code>
+    </div>
+  </section>
+  <section id="grafana" class="inner">
+    <h2>HOW TO ACCESS GRAFANA</h2>
+    <p>Grafana platform is listening on port 3000 and it is monitoring all the containers.</p>
+    <p>It is linked with an InfluxDB database listening on port 8086.</p>
+    <p>Link : <a class="link" href="https://192.168.49.100:3000">https://192.168.49.100:3000</a></p>
+    <p>The following information is the login info.</p>
+    <ul class="wp-user-list">
+      <li class="wp-user-item head">
+        <p class="username">USERNAME</p>
+        <p class="password">PASSWORD</p>
+      </li>
+      <li class="wp-user-item content">
+        <p class="username">admin</p>
+        <p class="password">admin</p>
+      </li>
+    </ul>
+    <p>If you want to stop influxDB and check if the data persists, use the following command.</p>
+    <div class="code-chunk">
+      <code>kubectl exec deploy/influxdb-deployment -- pkill influxd</code>
+    </div>
+  </section>
+</main>
+<footer>
+  <p class="copyright inner"><small>Copyright&copy;KENSHI FUJIWARA. All Rights Reserved.</small></p>
+</footer>
+</body>
+</html>

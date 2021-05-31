@@ -6,7 +6,7 @@
 #    By: kefujiwa <kefujiwa@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:27:31 by kefujiwa          #+#    #+#              #
-#    Updated: 2021/05/31 15:28:07 by kefujiwa         ###   ########.fr        #
+#    Updated: 2021/06/01 01:36:26 by kefujiwa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ RUN	mkdir -p /var/www/phpmyadmin && \
 	wget -O /tmp/phpmyadmin.tar.gz --no-check-certificate https://files.phpmyadmin.net/phpMyAdmin/5.0.2/phpMyAdmin-5.0.2-all-languages.tar.gz && \
 	tar -xvzf /tmp/phpmyadmin.tar.gz -C /var/www/phpmyadmin --strip-components 1 && \
 	rm /tmp/phpmyadmin.tar.gz && \
-	chown -R nginx:nginx var/www/phpmyadmin;
+	chown -R nginx:nginx /var/www/phpmyadmin;
 
 # generate secret key > create csr > create digital certificate
 RUN	mkdir -p /etc/nginx/ssl && \
